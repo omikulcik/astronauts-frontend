@@ -1,0 +1,8 @@
+@import "./extends";
+
+.header {
+    @extend %layout;
+    h1 {
+        justify-self: end
+    }
+}

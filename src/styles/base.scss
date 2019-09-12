@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+html { font-size: 62.5%;
+       font-family: 'Montserrat', sans-serif;
+      }
+
+body {
+  background: #360033; 
+  background: -webkit-linear-gradient(to right, #360033, #0b8793); 
+  background: linear-gradient(to right, #360033, #0b8793);
+  font-size: 1.6rem
+}
+
+h1 {
+  font-size: 2.4rem
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 20% auto 20%;
+}
+
+.content{
+  grid-column: 2/3;
+  margin-top: 10rem;
+}

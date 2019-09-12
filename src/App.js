@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer, useEffect } from 'react'
+import "react-datepicker/dist/react-datepicker.css"
+import './styles/index.scss'
+import client from "./apollo/client"
+import { ApolloProvider } from "@apollo/react-hooks"
+import Header from "./components/Header"
+import AstronautsTable from "./components/AstronautsTable"
+import astronautsReducer from "./reducers/astronautsReducer"
+import { startPopulateAstronauts } from "./actions/astronautsActions";
 
-function App() {
+const App = () => {
+  const [astronauts, astronautsDispatch] = useReducer(astronautsReducer)
+
+  useEffect(() => {
+    startPopulateAstronauts(client, astronautsDispatch)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ApolloProvider client={client} id="main">
+      <div className="container">
+        <div className="content">
+          <Header />
+          {astronauts ? <AstronautsTable
+            astronauts={astronauts}
+            astronautsDispatch={astronautsDispatch} /> :
+            <p>Loading</p>
+          }
+        </div>
+      </div>
+    </ApolloProvider>
+  )
 }
 
 export default App;
